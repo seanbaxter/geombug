@@ -1,0 +1,105 @@
+; SPIR-V
+; Version: 1.5
+; Generator: Khronos; 0
+; Bound: 55
+; Schema: 0
+               OpCapability Shader
+               OpCapability Geometry
+               OpExtension "GL_EXT_scalar_block_layout"
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Vertex %_Z9vert_mainv "_Z9vert_mainv"
+               OpEntryPoint Geometry %_Z9geom_mainv "_Z9geom_mainv" %glgeom_Output
+               OpEntryPoint Fragment %_Z9frag_mainv "_Z9frag_mainv" %_Z10shader_outILi0EDv4_fE
+               OpExecutionMode %_Z9geom_mainv InputPoints
+               OpExecutionMode %_Z9geom_mainv OutputTriangleStrip
+               OpExecutionMode %_Z9geom_mainv OutputVertices 3
+               OpExecutionMode %_Z9frag_mainv OriginUpperLeft
+               OpName %gl_PerVertex "gl_PerVertex"
+               OpMemberName %gl_PerVertex 0 "Position"
+               OpMemberName %gl_PerVertex 1 "PointSize"
+               OpMemberName %gl_PerVertex 2 "ClipDistance"
+               OpMemberName %gl_PerVertex 3 "CullDistance"
+               OpName %glgeom_Output "glgeom_Output"
+               OpName %_Z10shader_outILi0EDv4_fE "_Z10shader_outILi0EDv4_fE"
+               OpName %_Z9vert_mainv "_Z9vert_mainv"
+               OpName %_Z9geom_mainv "_Z9geom_mainv"
+               OpName %_Z9frag_mainv "_Z9frag_mainv"
+               OpDecorate %_arr_float_uint_1 ArrayStride 4
+               OpDecorate %gl_PerVertex Block
+               OpMemberDecorate %gl_PerVertex 0 BuiltIn Position
+               OpMemberDecorate %gl_PerVertex 1 BuiltIn PointSize
+               OpMemberDecorate %gl_PerVertex 2 BuiltIn ClipDistance
+               OpMemberDecorate %gl_PerVertex 3 BuiltIn CullDistance
+               OpDecorate %_Z10shader_outILi0EDv4_fE Location 0
+               OpDecorate %_arr_v3float_uint_3 ArrayStride 12
+      %float = OpTypeFloat 32
+    %v4float = OpTypeVector %float 4
+       %uint = OpTypeInt 32 0
+     %uint_1 = OpConstant %uint 1
+%_arr_float_uint_1 = OpTypeArray %float %uint_1
+%gl_PerVertex = OpTypeStruct %v4float %float %_arr_float_uint_1 %_arr_float_uint_1
+%_ptr_Output_gl_PerVertex = OpTypePointer Output %gl_PerVertex
+%glgeom_Output = OpVariable %_ptr_Output_gl_PerVertex Output
+%_ptr_Output_v4float = OpTypePointer Output %v4float
+%_Z10shader_outILi0EDv4_fE = OpVariable %_ptr_Output_v4float Output
+       %void = OpTypeVoid
+         %15 = OpTypeFunction %void
+    %v3float = OpTypeVector %float 3
+     %uint_3 = OpConstant %uint 3
+%_arr_v3float_uint_3 = OpTypeArray %v3float %uint_3
+%_ptr_Function__arr_v3float_uint_3 = OpTypePointer Function %_arr_v3float_uint_3
+        %int = OpTypeInt 32 1
+%_ptr_Function_int = OpTypePointer Function %int
+  %float_0_5 = OpConstant %float 0.5
+    %float_0 = OpConstant %float 0
+         %28 = OpConstantComposite %v3float %float_0_5 %float_0 %float_0
+         %29 = OpConstantComposite %v3float %float_0 %float_0_5 %float_0
+ %float_n0_5 = OpConstant %float -0.5
+         %31 = OpConstantComposite %v3float %float_n0_5 %float_0 %float_0
+         %32 = OpConstantComposite %_arr_v3float_uint_3 %28 %29 %31
+      %int_0 = OpConstant %int 0
+       %bool = OpTypeBool
+      %int_3 = OpConstant %int 3
+%_ptr_Function_v3float = OpTypePointer Function %v3float
+    %float_1 = OpConstant %float 1
+      %int_1 = OpConstant %int 1
+%float_0_600000024 = OpConstant %float 0.600000024
+%float_0_200000003 = OpConstant %float 0.200000003
+         %54 = OpConstantComposite %v4float %float_0_600000024 %float_0_200000003 %float_0_200000003 %float_1
+%_Z9vert_mainv = OpFunction %void None %15
+         %16 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%_Z9geom_mainv = OpFunction %void None %15
+         %17 = OpLabel
+         %22 = OpVariable %_ptr_Function__arr_v3float_uint_3 Function
+         %25 = OpVariable %_ptr_Function_int Function
+               OpStore %22 %32
+               OpStore %25 %int_0
+               OpBranch %34
+         %34 = OpLabel
+         %35 = OpLoad %int %25
+         %38 = OpSLessThan %bool %35 %int_3
+               OpLoopMerge %39 %40 None
+               OpBranchConditional %38 %40 %39
+         %40 = OpLabel
+         %41 = OpLoad %int %25
+         %43 = OpAccessChain %_ptr_Function_v3float %22 %41
+         %44 = OpLoad %v3float %43
+         %46 = OpCompositeConstruct %v4float %44 %float_1
+         %47 = OpAccessChain %_ptr_Output_v4float %glgeom_Output %int_0
+               OpStore %47 %46
+               OpEmitVertex
+         %48 = OpLoad %int %25
+         %50 = OpIAdd %int %48 %int_1
+               OpStore %25 %50
+               OpBranch %34
+         %39 = OpLabel
+               OpEndPrimitive
+               OpReturn
+               OpFunctionEnd
+%_Z9frag_mainv = OpFunction %void None %15
+         %51 = OpLabel
+               OpStore %_Z10shader_outILi0EDv4_fE %54
+               OpReturn
+               OpFunctionEnd
